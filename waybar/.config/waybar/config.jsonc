@@ -1,0 +1,22 @@
+{
+	"layer": "top",
+	"modules-left": ["hyprland/workspaces"],
+	"modules-right": ["battery", "clock"],
+	"sway/window": {
+		"max-length": 50
+	},
+	"battery": {
+		"format": "{capacity}% {icon}",
+		"format-icons": ["", "", "", "", ""]
+	},
+	"clock": {
+		"format-alt": "{:%a, %d. %b  %H:%M}"
+	},
+	"hyprland/workspaces": {
+		"format": "{name}",
+		"persistent-workspaces": {
+			"*": 5, // 5 workspaces by default on every monitor
+			"HDMI-A-1": 3 // but only three on HDMI-A-1
+		}
+	}
+}
