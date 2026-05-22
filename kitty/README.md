@@ -1,0 +1,1 @@
+Basic kitty setup + theme.
