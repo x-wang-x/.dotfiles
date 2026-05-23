@@ -118,6 +118,7 @@ alias zr="exec zsh"
 alias vnv="source .venv/bin/activate"
 alias py="python"
 alias aria="aria2c --enable-rpc --rpc-listen-all --daemon"
+alias i="sudo pacman -S"
 
 #highlight
 # source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
