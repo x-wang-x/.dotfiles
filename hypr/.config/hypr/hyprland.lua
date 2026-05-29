@@ -28,10 +28,10 @@ hl.monitor({
 ---------------------
 
 -- Set programs that you use
-local terminal    = "kitty"
-local fileManager = "dolphin"
-local menu        = "hyprlauncher"
-
+local terminal    = "ghostty"
+local fileManager = "nemo"
+local menu        = "rofi -show drun"
+local wallpaper = "awww-daemon"
 
 -------------------
 ---- AUTOSTART ----
@@ -44,8 +44,10 @@ local menu        = "hyprlauncher"
 --
 hl.on("hyprland.start", function () 
   hl.exec_cmd(terminal)
+  hl.exec_cmd("swaync")
   hl.exec_cmd("nm-applet")
-  hl.exec_cmd("waybar & hyprpaper")
+  hl.exec_cmd(wallpaper)
+  hl.exec_cmd("waybar")
 end)
 
 

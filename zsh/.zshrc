@@ -99,7 +99,8 @@ export FZF_DEFAULT_OPTS='
 --inline-info
 --cycle
 '
-
+# nautilus 
+export NO_AT_BRIDGE=1
 #alias
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias duh='du -h -d 0 */ | sort -h'
@@ -118,8 +119,9 @@ alias zr="exec zsh"
 alias vnv="source .venv/bin/activate"
 alias py="python"
 alias aria="aria2c --enable-rpc --rpc-listen-all --daemon"
-alias i="sudo pacman -S"
-
+#arch pacman
+alias s="sudo pacman -S"
+alias rs="sudo pacman -Rs"
 #highlight
 # source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

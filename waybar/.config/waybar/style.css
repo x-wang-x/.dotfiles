@@ -1,73 +1,69 @@
+@import "colors.css";
+
+/* Base font setup */
 * {
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
     border: none;
     border-radius: 0;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    min-height: 0;
 }
 
+/* The invisible main bar container */
 window#waybar {
-    background: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-    color: white;
+    background-color: transparent;
 }
 
-tooltip {
-  background: rgba(43, 48, 59, 0.5);
-  border: 1px solid rgba(100, 114, 125, 0.5);
+/* Style for EVERY pill module on the bar */
+#workspaces,
+#clock,
+#network,
+#pulseaudio,
+#battery {
+    background-color: rgba(20, 20, 20, 0.65); /* Dark transparent glass background */
+    color: @on_surface_variant;
+    padding: 4px 14px;
+    border-radius: 12px; /* Smooth pill shape */
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
-tooltip label {
-  color: white;
+
+/* --- Left: Workspaces --- */
+#workspaces {
+    padding: 4px 6px;
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background: transparent;
-    color: white;
-    border-bottom: 3px solid transparent;
+    padding: 0 8px;
+    color: @on_surface_variant;
+    background-color: transparent;
+    transition: all 0.2s ease;
 }
 
-#workspaces button.focused {
-    background: #64727D;
-    border-bottom: 3px solid white;
+/* Workspace hovering */
+#workspaces button:hover {
+    color: @primary;
+    background-color: transparent;
 }
 
-#mode, #clock, #battery {
-    padding: 0 10px;
+/* Active workspace pops out using Matugen colors */
+#workspaces button.active {
+    color: @background;
+    background-color: @primary;
+    border-radius: 8px;
 }
 
-#mode {
-    background: #64727D;
-    border-bottom: 3px solid white;
-}
-
+/* --- Center: Clock --- */
 #clock {
-    background-color: #64727D;
+    color: @primary;
+    font-weight: 800;
 }
 
-#battery {
-    background-color: #ffffff;
-    color: black;
+/* --- Right: Status Indicators --- */
+#network.disconnected,
+#battery.critical {
+    color: #ff6c6b; /* Soft red for warning alerts */
 }
 
 #battery.charging {
-    color: white;
-    background-color: #26A65B;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: black;
-    }
-}
-
-#battery.warning:not(.charging) {
-    background: #f53c3c;
-    color: white;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: steps(12);
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+    color: #98be65; /* Soft green for charging status */
 }

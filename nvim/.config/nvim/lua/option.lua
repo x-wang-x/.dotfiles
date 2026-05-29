@@ -5,8 +5,8 @@ vim.o.number = true
 vim.o.relativenumber = true 
 
 vim.opt.expandtab = true
-
-
+-- using terminal 24-bit color
+vim.opt.termguicolors = true
 
 vim.opt.tabstop = 4 
 vim.opt.softtabstop = 4
@@ -17,11 +17,12 @@ vim.opt.wrap = false
 vim.opt.smartindent = true 
 vim.opt.inccommand = "split" 
 
-vim.opt.splitbelow = true 
-vim.opt.splitright = true 
+vim.opt.splitbelow = true -- horizontal split => below 
+vim.opt.splitright = true -- vertical split => right 
 
-vim.opt.ignorecase = true 
-vim.opt.smartcase = true 
+vim.opt.ignorecase = true -- case insensitive
+vim.opt.smartcase = true  -- case sensitive if got capital letter
+
 vim.opt.laststatus = 3 
 
 vim.opt.swapfile = false 
@@ -37,6 +38,7 @@ vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "0" 
 vim.opt.signcolumn = "yes" 
 vim.o.cmdheight = 0 
+
 vim.api.nvim_create_autocmd("TextYankPost",
 { 
 	desc = "Highlight when yanking (copying) text", 

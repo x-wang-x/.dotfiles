@@ -12,72 +12,76 @@ vim.pack.add {
 	'https://github.com/nvim-tree/nvim-web-devicons',
 	--lualine
 	'https://github.com/nvim-lualine/lualine.nvim',
+    --surround
+    'https://github.com/nvim-mini/mini.surround',
+    --notify
+    'https://github.com/nvim-mini/mini.notify',
 }
 
-local telescope = require("telescope")
-local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
--- Delete buffer
-local d_buffer = function(prompt_bufnr)
-	local selection = action_state.get_selected_entry()
-	if selection and selection.bufnr then
-		actions.delete_buffer(prompt_bufnr)
-	else
-		print("Not an active buffer.")
-	end
-end
--- Delete file
-local hard_d = function(prompt_bufnr)
-	local selection = action_state.get_selected_entry()
-	local filename = selection.path or selection.filename
-	if not filename then
-		return
-	end
-	-- Confirmation
-	vim.ui.input({ prompt = "Delete " .. filename .. " from disk? (y/n): " }, function(input)
-		if input == "y" or input == "Y" then
-			if selection.bufnr then
-				actions.delete_buffer(prompt_bufnr)
-			end
-			os.remove(filename)
-			print("Deleted: " .. filename)
-		end
-	end)
-	actions.close(prompt_bufnr)
-end
-
--- Run the setup using the variables defined above
-telescope.setup({
-	defaults = {
-		winblend = 0,
-		mappings = {
-			i = {
-				["<C-d>"] = d_buffer,
-				["<C-x>"] = hard_d,
-				["<C-n>"] = function(prompt_bufnr)
-					actions.close(prompt_bufnr)
-					vim.ui.input({ prompt = "New file: " }, function(input)
-						if input and input ~= "" then
-							vim.cmd("edit " .. input)
-						end
-					end)
-				end,
-				["QQ"] = function(prompt_bufnr)
-					actions.close(prompt_bufnr)
-				end,
-			},
-		},
-	},
-	pickers = {
-		buffers = {
-			hidden = true,
-			show_all_buffers = true,
-			sort_lastused = true,
-			theme = "dropdown",
-			previewer = false,
-		},
-	},
-})
+-- local telescope = require("telescope")
+-- local actions = require("telescope.actions")
+-- local action_state = require("telescope.actions.state")
+-- -- Delete buffer
+-- local d_buffer = function(prompt_bufnr)
+-- 	local selection = action_state.get_selected_entry()
+-- 	if selection and selection.bufnr then
+-- 		actions.delete_buffer(prompt_bufnr)
+-- 	else
+-- 		print("Not an active buffer.")
+-- 	end
+-- end
+-- -- Delete file
+-- local hard_d = function(prompt_bufnr)
+-- 	local selection = action_state.get_selected_entry()
+-- 	local filename = selection.path or selection.filename
+-- 	if not filename then
+-- 		return
+-- 	end
+-- 	-- Confirmation
+-- 	vim.ui.input({ prompt = "Delete " .. filename .. " from disk? (y/n): " }, function(input)
+-- 		if input == "y" or input == "Y" then
+-- 			if selection.bufnr then
+-- 				actions.delete_buffer(prompt_bufnr)
+-- 			end
+-- 			os.remove(filename)
+-- 			print("Deleted: " .. filename)
+-- 		end
+-- 	end)
+-- 	actions.close(prompt_bufnr)
+-- end
+--
+-- -- Run the setup using the variables defined above
+-- telescope.setup({
+-- 	defaults = {
+-- 		winblend = 0,
+-- 		mappings = {
+-- 			i = {
+-- 				["<C-d>"] = d_buffer,
+-- 				["<C-x>"] = hard_d,
+-- 				["<C-n>"] = function(prompt_bufnr)
+-- 					actions.close(prompt_bufnr)
+-- 					vim.ui.input({ prompt = "New file: " }, function(input)
+-- 						if input and input ~= "" then
+-- 							vim.cmd("edit " .. input)
+-- 						end
+-- 					end)
+-- 				end,
+-- 				["QQ"] = function(prompt_bufnr)
+-- 					actions.close(prompt_bufnr)
+-- 				end,
+-- 			},
+-- 		},
+-- 	},
+-- 	pickers = {
+-- 		buffers = {
+-- 			hidden = true,
+-- 			show_all_buffers = true,
+-- 			sort_lastused = true,
+-- 			theme = "dropdown",
+-- 			previewer = false,
+-- 		},
+-- 	},
+-- })
 
 require("oil").setup({
 	columns = {
@@ -92,6 +96,25 @@ require("catppuccin").setup({
 	term_colors = true, 
 	transparent_background = true,
 })
+require('mini.surround').setup({
+    mappings = {
+        add = 'sa', -- Add surrounding in Normal and Visual modes
+        delete = 'sd', -- Delete surrounding
+        find = 'sf', -- Find surrounding (to the right)
+        find_left = 'sF', -- Find surrounding (to the left)
+        highlight = 'sh', -- Highlight surrounding
+        replace = 'sr', -- Replace surrounding}
+    },
+}) 
+local mini_notify = require('mini.notify')
+mini_notify.setup()
+-- mini_notify.setup({
+-- content = {
+--     format = function(notif)
+--         return notif.msg
+--     end,
+--   },
+-- })
 require("lualine").setup({
 	options = {
 		theme = "carbonfox", 

@@ -1,22 +1,74 @@
 {
-	"layer": "top",
-	"modules-left": ["hyprland/workspaces"],
-	"modules-right": ["battery", "clock"],
-	"sway/window": {
-		"max-length": 50
-	},
-	"battery": {
-		"format": "{capacity}% {icon}",
-		"format-icons": ["", "", "", "", ""]
-	},
-	"clock": {
-		"format-alt": "{:%a, %d. %b  %H:%M}"
-	},
-	"hyprland/workspaces": {
-		"format": "{name}",
-		"persistent-workspaces": {
-			"*": 5, // 5 workspaces by default on every monitor
-			"HDMI-A-1": 3 // but only three on HDMI-A-1
-		}
-	}
+    "layer": "top",
+    "position": "top",
+    "margin-top": 10,
+    "margin-left": 15,
+    "margin-right": 15,
+    "spacing": 8,
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-right": ["network", "pulseaudio", "clock", "custom/controlcenter"],
+    "modules-center": ["hyprland/window"],
+    "hyprland/workspaces": {
+        "persistent-workspaces": {
+          "*": [1, 2, 3, 4, 5],
+        },
+        "active-only": false,
+        "all-outputs": false,
+        "on-click": "activate",
+    },
+
+    "hyprland/window": {
+    "format": "{title}",
+    "max-length": 60,
+    "separate-outputs": true,
+    "rewrite": {
+      "": "Desktop",
+    },
+    },
+    "clock": {
+        "format": "{:%I:%M %p}",
+        "format-alt": "{:%A, %B %d}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+          "mode": "month",
+          "format": {
+            "months": "<b>{}</b>",
+            "today": "<b><u>{}</u></b>",
+          },
+        },    
+    },
+
+    "network": {
+        "format-wifi": "  {essid} ({signalStrength}%)", // Adds the percentage in brackets
+        "format-ethernet": "󰈀 Wire",
+        "format-disconnected": "󰖪 Down",
+        "tooltip-format": "Gateway: {gwaddr} | IP: {ipaddr}",
+        "on-click": "nm-connection-editor"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": " {volume}%",
+        "format-muted": "󰝟 Muted",
+        "format-icons": {
+            "headphone": "",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol"
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󱐋 {capacity}%",
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"]
+    },
+    "custom/controlcenter": {
+        "format": "󰂚",
+        "on-click": "swaync-client --toggle-panel",
+        "tooltip": false,
+        }
 }
