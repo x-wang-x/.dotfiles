@@ -22,17 +22,16 @@ hl.monitor({
     scale    = "1.25",
 })
 
-
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
 
 -- Set programs that you use
-local terminal    = "ghostty"
+local terminal    = "kitty"
 local fileManager = "nemo"
 local menu        = "rofi -show drun"
 local wallpaper = "awww-daemon"
-
+local browser = "firefox"
 -------------------
 ---- AUTOSTART ----
 -------------------
@@ -47,7 +46,8 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("swaync")
   hl.exec_cmd("nm-applet")
   hl.exec_cmd(wallpaper)
-  hl.exec_cmd("waybar")
+  hl.exec_cmd("waybar &")
+  hl.exec_cmd("cava")
 end)
 
 
@@ -83,19 +83,19 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -----------------------
 ---- LOOK AND FEEL ----
 -----------------------
-
+local colors = require("hyprland-colors")
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
     general = {
-        gaps_in  = 3,
-        gaps_out = 10,
+        gaps_in  = 2,
+        gaps_out = 4,
 
         border_size = 2,
 
         col = {
             -- active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
-	    active_border = "rgba(00ff99ee)",
-            inactive_border = "rgba(595959aa)",
+	    active_border = colors.primary,
+            inactive_border = colors.on_primary,
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -108,12 +108,12 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 2,
-        rounding_power = 2,
+        rounding       = 1,
+        rounding_power = 1,
 
         -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
-        inactive_opacity = 1.0,
+        inactive_opacity = 0.99,
 
         shadow = {
             enabled      = false,
@@ -206,12 +206,12 @@ hl.config({
 ----  MISC  ----
 ----------------
 
-hl.config({
-    misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
-    },
-})
+-- hl.config({
+--     misc = {
+--         force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
+--         disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
+--     },
+-- })
 
 
 ---------------
@@ -266,6 +266,7 @@ local closeWindowBind = hl.bind(mainMod .. " + W", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())

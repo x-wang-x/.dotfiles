@@ -6,29 +6,33 @@ output_path = "~/.config/swaync/colors.css"
 post_hook = "swaync-client -rs"
 
 [templates.hyprland]
-input_path = '~/.config/matugen/templates/hyprland-colors.conf'
-output_path = '~/.config/matugen/hyprland-colors.conf'
+input_path = "~/.config/matugen/templates/hyprland.lua"
+output_path = "~/.config/hypr/hyprland-colors.lua"
 
 [templates.pywalfox]
-input_path = '~/.config/matugen/templates/pywalfox.json'
-output_path = '~/.cache/wal/colors.json'
-post_hook = 'pywalfox update'
+input_path = "~/.config/matugen/templates/pywalfox.json"
+output_path = "~/.cache/wal/colors.json"
+post_hook = "pywalfox update"
 
 [templates.yazi]
-input_path = '~/.config/matugen/templates/yazi.toml'
-output_path = '~/.config/yazi/theme.toml'
+input_path = "~/.config/matugen/templates/yazi.toml"
+output_path = "~/.config/yazi/theme.toml"
 
 [templates.ghostty]
-input_path = '~/.config/matugen/templates/ghostty'
-output_path = '~/.config/ghostty/themes/Matugen'
-post_hook = 'pkill -SIGUSR2 ghostty'
+input_path = "~/.config/matugen/templates/ghostty"
+output_path = "~/.config/ghostty/themes/Matugen"
+post_hook = "pkill -SIGUSR2 ghostty"
 
 [templates.kitty]
 input_path = "~/.config/matugen/templates/kitty.conf"
-output_path = '~/.config/kitty/themes/Matugen.conf'
+output_path = "~/.config/kitty/themes/Matugen.conf"
 post_hook = "kitty +kitten themes --reload-in=all Matugen"
 
 [templates.waybar]
 input_path = "~/.config/matugen/templates/waybar.css"
 output_path = "~/.config/waybar/colors.css"
 post_hook = "pkill -SIGUSR2 waybar"
+
+[templates.rofi]
+input_path = "~/.config/matugen/templates/rofi.rasi"
+output_path = "~/.config/rofi/matugen-colors.rasi"

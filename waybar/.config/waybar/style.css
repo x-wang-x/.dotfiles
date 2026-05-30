@@ -15,6 +15,10 @@ window#waybar {
 }
 
 /* Style for EVERY pill module on the bar */
+#custom-controlcenter,
+#custom-cpu_mem,
+#mpris,
+#window,
 #workspaces,
 #clock,
 #network,
@@ -24,9 +28,29 @@ window#waybar {
     color: @on_surface_variant;
     padding: 4px 14px;
     border-radius: 12px; /* Smooth pill shape */
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin: 1px;
+    border: 2px solid @outline;
 }
-
+#cpu {
+    background-color: rgba(20, 20, 20, 0.65); /* Dark transparent glass background */
+    color: @on_surface_variant;
+    padding: 4px 4px 0 14px;
+    border-radius: 12px 0 0 12px;
+    border-top: 2px solid @outline;
+    border-bottom: 2px solid @outline;
+    border-left: 2px solid @outline;
+    border-right: none 
+}
+#memory {
+    background-color: rgba(20, 20, 20, 0.65); /* Dark transparent glass background */
+    color: @on_surface_variant;
+    padding: 4px 4px 14px 0;
+    border-radius: 0 12px 12px 0;
+    border-top: 2px solid @outline;
+    border-bottom: 2px solid @outline;
+    border-right: 2px solid @outline;
+    border-left: none 
+}
 /* --- Left: Workspaces --- */
 #workspaces {
     padding: 4px 6px;

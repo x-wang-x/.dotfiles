@@ -1,30 +1,61 @@
 {
     "layer": "top",
-    "position": "top",
-    "margin-top": 10,
-    "margin-left": 15,
-    "margin-right": 15,
-    "spacing": 8,
+    "position": "bottom",
+    "margin-top": 5,
+    "margin-left": 5,
+    "margin-right": 5,
+    "spacing": 0,
 
-    "modules-left": ["hyprland/workspaces"],
-    "modules-right": ["network", "pulseaudio", "clock", "custom/controlcenter"],
+    "modules-left": ["hyprland/workspaces","mpris"],
+    "modules-right": ["custom/cpu_mem","network", "pulseaudio", "clock", "custom/controlcenter"],
     "modules-center": ["hyprland/window"],
+    "mpris": {
+        "format": "{player_icon} {status_icon} {artist} - {title}",
+        "format-paused": "{status_icon} <i>{artist} - {title}</i>",
+        "max-length": 25,
+        "player-icons": {
+            "default": "",
+            "spotify": "",
+            "mpv": "",
+            "firefox": "",
+            
+        },
+        "status-icons": {
+            "paused": "▶",
+            "playing": "⏸",
+        },
+        "on-click": "playerctl play-pause",
+        // "ignored-players": ["firefox"]
+    },
     "hyprland/workspaces": {
         "persistent-workspaces": {
           "*": [1, 2, 3, 4, 5],
         },
-        "active-only": false,
-        "all-outputs": false,
-        "on-click": "activate",
+        "format": "{name}",
+        // "format-window-separator": "\n",
+        // "window-rewrite-default": "",
+        // "window-rewrite": {
+        //     "title<.*youtube.*>": "", // Windows whose titles contain "youtube"
+        //     "class<firefox>": "", // Windows whose classes are "firefox"
+        //     "class<com.mitchellh.ghostty>": "", 
+        // },
+        "active-only": true,
+        "all-outputs": true,
     },
-
+    "custom/cpu_mem": {
+        "exec": "~/.config/waybar/scripts/cpu_mem_usage.sh",
+        "interval": 10,
+        "format": "{}",
+        "tooltip": false
+    },
     "hyprland/window": {
-    "format": "{title}",
-    "max-length": 60,
-    "separate-outputs": true,
-    "rewrite": {
-      "": "Desktop",
-    },
+        "format": "{}",
+        "max-length": 50,
+        "separate-outputs": true,
+        "rewrite": {
+            "": "Desktop",
+            "(.*) — Mozilla Firefox": " $1",
+        },
     },
     "clock": {
         "format": "{:%I:%M %p}",
@@ -40,11 +71,14 @@
     },
 
     "network": {
-        "format-wifi": "  {essid} ({signalStrength}%)", // Adds the percentage in brackets
-        "format-ethernet": "󰈀 Wire",
+        "format-wifi": "{icon}{signalStrength}%", // Adds the percentage in brackets
+        "format-ethernet": "󰈀  Wire",
         "format-disconnected": "󰖪 Down",
-        "tooltip-format": "Gateway: {gwaddr} | IP: {ipaddr}",
-        "on-click": "nm-connection-editor"
+        "tooltip-format": "SSID: {essid}\nIP: {ipaddr}",
+        "on-click": "nm-connection-editor",
+        "format-icons": {
+            "wifi": ["󰤯 ","󰤟 ","󰤢 ","󰤥 ","󰤨 "],
+        },
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",

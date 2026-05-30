@@ -1,0 +1,7 @@
+@define-color bg-selected #ffb4a8;
+@define-color text-selected #561e16;
+@define-color bg-main rgba(20, 20, 20, 0.7);
+@define-color bg-card rgba(30, 30, 30, 0.6);
+@define-color border-color #ffb4a8;
+@define-color text-main #f1dfdb;
+@define-color text-muted #d8c2be;

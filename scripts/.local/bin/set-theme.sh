@@ -10,7 +10,7 @@ awww img "$WP_PATH" --transition-type wipe --transition-angle 30
 #generate color
 matugen image "$WP_PATH"
 #restart waybar
-./restart-waybar.sh
+source restart-waybar.sh
 #restart swaync
 swaync-client -R
 swaync-client -rs

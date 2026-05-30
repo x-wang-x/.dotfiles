@@ -8,7 +8,12 @@ need to install
 - ghostty
 - swaync
 - zoxide
-- nm-applet
+- pavucontrol
+- network-manager-applet
 - nemo
 - waybar
 - swww
+- rofi
+- wl-clipboard
+- matugen
+- cava

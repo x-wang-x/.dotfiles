@@ -1,0 +1,44 @@
+@import "colors.css";
+
+/* Base font layout configurations */
+* {
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-weight: bold;
+}
+
+/* Floating notification popup notification boxes */
+.notification {
+    background: @bg-card;
+    padding: 10px;
+    margin: 6px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Highlight the specific window border using wallpaper primary color */
+.notification-content {
+    color: @text-main;
+}
+
+.notification-time, .notification-body {
+    color: @text-muted;
+    font-weight: normal;
+}
+
+/* The Main Control Sidebar Container */
+.control-center {
+    background: @bg-main;
+    border-radius: 16px;
+    border: 2px solid @border-color;
+    margin: 10px;
+    padding: 14px;
+}
+
+/* Clear buttons matching accent profile colors */
+.widget-title button {
+    background: @bg-selected;
+    color: @text-selected;
+    border-radius: 8px;
+    padding: 4px 10px;
+}

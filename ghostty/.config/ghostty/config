@@ -1,0 +1,7 @@
+theme = "Matugen"
+background-opacity = 0.9
+font-family = "BlexMono Nerd Font"
+font-thicken = true
+font-size = 15
+
+mouse-hide-while-typing = true
