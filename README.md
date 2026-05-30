@@ -16,4 +16,3 @@ need to install
 - rofi
 - wl-clipboard
 - matugen
-- cava
