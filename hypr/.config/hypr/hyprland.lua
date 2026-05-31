@@ -1,4 +1,4 @@
--- This is an example Hyprland Lua config file.
+-- Thes is an example Hyprland Lua config file.
 -- Refer to the wiki for more information.
 -- https://wiki.hypr.land/Configuring/Start/
 
@@ -31,7 +31,7 @@ local terminal    = "kitty"
 local fileManager = "nemo"
 local menu        = "rofi -show drun"
 local wallpaper = "awww-daemon"
-local browser = "firefox"
+local browser = "librewolf"
 -------------------
 ---- AUTOSTART ----
 -------------------
