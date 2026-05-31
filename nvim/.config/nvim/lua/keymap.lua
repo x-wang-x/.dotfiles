@@ -1,6 +1,9 @@
 vim.g.mapleader = " "
 
 local keymap = vim.keymap.set
+--- Oil
+keymap("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Oil Filemanager" })
+keymap("n", "<leader>_", "<CMD>Oil --float<CR>", { desc = "Floating Oil Filemanager" })
 ---- Telescope
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find Files" })
 keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Live Grep" })
