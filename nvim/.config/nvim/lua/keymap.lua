@@ -5,6 +5,7 @@ local keymap = vim.keymap.set
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find Files" })
 keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Live Grep" })
 keymap("n", "<leader><leader>", "<cmd>Telescope buffers<CR>", { desc = "All Buffers" })
+keymap("n", "<leader>k", "<cmd>Telescope keymaps<CR>", { desc = "Show all keymaps" })
 keymap("n", "<leader>x", ":bd<CR>", { desc = "Recent Files" })
 ---- Save and / or quit
 keymap("n", "<leader>w", ":w<CR>")
