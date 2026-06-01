@@ -102,7 +102,6 @@ export FZF_DEFAULT_OPTS='
 # nautilus 
 export NO_AT_BRIDGE=1
 #alias
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias duh='du -h -d 0 */ | sort -h'
 alias gp='git push'
 alias gl='git pull'
