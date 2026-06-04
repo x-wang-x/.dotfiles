@@ -1,6 +1,16 @@
 vim.g.mapleader = " "
 
 local keymap = vim.keymap.set
+--- Quote workaround
+vim.keymap.set("n", "[q", "?[\"'`]<CR><cmd>nohl<CR>", { noremap = true, desc = "Go to next quote" })
+vim.keymap.set("n", "]q", "/[\"'`]<CR><cmd>nohl<CR>", { noremap = true, desc = "Go to previous quote" })
+vim.keymap.set("n", "dq", "v/[\"'`]<CR><Left>d<cmd>nohl<CR>", { noremap = true, desc = "Delete up to next quote" })
+vim.keymap.set("n", "yq", "v/[\"'`]<CR><Left>y<cmd>nohl<CR>", { noremap = true, desc = "Yank up to next quote" })
+vim.keymap.set("n", "cq", "v/[\"'`]<CR><Left>di<cmd>nohl<CR>", { noremap = true, desc = "Change up to next quote" })
+--- Better navigation on normal mode 
+vim.keymap.set('n', '<BS>', 'a<BS><Esc>', { noremap = true })
+vim.keymap.set('n', '<CR>', 'o<Esc>', { noremap = true, silent = true })
+vim.keymap.set('n', '<S-CR>', 'O<Esc>', { noremap = true, silent = true })
 --- Oil
 keymap("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Oil Filemanager" })
 keymap("n", "<leader>_", "<CMD>Oil --float<CR>", { desc = "Floating Oil Filemanager" })
@@ -22,7 +32,7 @@ keymap("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 ---- Undotree
 keymap('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true, desc = "Toggle undotree" })
 ---- Replaces selected text WITHOUT losing what you yanked
-keymap("x", "p", [["_dP]], { desc = "Paste over selection without losing yanked text" })
+keymap("x", "<leader>p", [["_dP]], { desc = "Paste over selection without losing yanked text" })
 ---- Delete text without saving it to any register
 keymap({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yanking" })
 ---- Clear highlight (searching)
@@ -56,3 +66,7 @@ keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Windo
 ---- Lsp
 keymap("n", "<leader>f", vim.lsp.buf.format, { desc = "Format Local buffer" })
 keymap("n", "<leader>dg", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Show Diagnostics on Current Buffer" })
+---- Search and replace
+keymap("n", "<leader>rr", [[:%s/]], { desc = "Search and replace word under cursor" })
+keymap("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]], { desc = "Search and replace word under cursor" })
+
