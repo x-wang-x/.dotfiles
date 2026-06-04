@@ -22,7 +22,11 @@ vim.pack.add {
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/mason-org/mason.nvim",
     "https://github.com/mason-org/mason-lspconfig.nvim",
-    "https://github.com/nvim-mini/mini.completion"
+    "https://github.com/nvim-mini/mini.completion",
+    -- Markdown utility
+    "https://github.com/MeanderingProgrammer/render-markdown.nvim",
+    "https://github.com/jakewvincent/mkdnflow.nvim",
+    "https://github.com/mzlogin/vim-markdown-toc"
 }
 require("mason").setup()
 require("mason-lspconfig").setup()
@@ -43,7 +47,7 @@ vim.lsp.config('lua_ls', {
                 preloadFileSize = 150,
             },
             diagnostics = {
-                globals = { "vim", "require","hl" },
+                globals = { "vim", "require", "hl" },
                 disable = { "missing-fields", "inject-field" },
             },
             telemetry = {
@@ -85,4 +89,44 @@ require("lualine").setup({
     options = {
         theme = "catppuccin-frappe",
     },
+})
+require('render-markdown').setup({
+  file_types = { 'markdown' },
+  heading = {
+    -- Adds clean background bars/icons to H1, H2, H3, etc.
+    sign = true,
+    icons = { '█─ ', '██─ ', '███─ ', '#### ', '##### ', '###### ' },
+  },
+  code = {
+    sign = false,
+    width = 'block', -- Extends the background highlight window fully across the block
+    right_pad = 4,
+  },
+  checkbox = {
+    enabled = true,
+    unchecked = { icon = '󰄱 ' },
+    checked = { icon = ' ' },
+  },
+  pipe_table = {
+    preset = 'round', -- Generates beautiful rounded borders around raw text markdown tables
+  }
+})
+
+require('mkdnflow').setup({
+    modules = {
+        bib = true,
+        buffers = true,
+        conceal = true,
+        cursor = true,
+        folds = true,
+        foldtext = true,
+        links = true,
+        lists = true,
+        maps = true,
+        paths = true,
+        tables = true,
+        to_do = true,
+        yaml = false,
+    notebook = true,
+    }
 })
