@@ -17,7 +17,7 @@ export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 # Bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/.local/bin:$BUN_INSTALL/bin:$PATH"
 
 # Enable completion
 autoload -Uz compinit
@@ -103,6 +103,7 @@ export FZF_DEFAULT_OPTS='
 export NO_AT_BRIDGE=1
 #alias
 alias duh='du -h -d 0 */ | sort -h'
+alias ls='ls -l'
 alias gp='git push'
 alias gl='git pull'
 alias ga='git add'
