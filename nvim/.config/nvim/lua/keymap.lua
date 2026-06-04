@@ -20,7 +20,7 @@ keymap({ "n", "i", "v" }, "<C-s>", "<Esc>:w<CR>", { desc = "Save file" })
 ---- Change mode
 keymap("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 ---- Undotree
-keymap('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true,desc = "Toggle undotree" })
+keymap('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true, desc = "Toggle undotree" })
 ---- Replaces selected text WITHOUT losing what you yanked
 keymap("x", "p", [["_dP]], { desc = "Paste over selection without losing yanked text" })
 ---- Delete text without saving it to any register
@@ -39,7 +39,7 @@ keymap("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Com
 keymap("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 ---- Join line without moving cursor
 keymap("n", "J", "mzJ’z", { desc = "Join lines without moving cursor" })
----- Cusor stay on center when scrolling 
+---- Cusor stay on center when scrolling
 keymap("n", "<C-d>", "<C-d>zz", { desc = "move down in buffer with cursor centered" })
 keymap("n", "<C-u>", "<C-u>zz", { desc = "move up in buffer with cursor centered" })
 ---- Cursor stay on center when searching
@@ -53,3 +53,6 @@ keymap("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 keymap("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 keymap("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+---- Lsp
+keymap("n", "<leader>f", vim.lsp.buf.format, { desc = "Format Local buffer" })
+keymap("n", "<leader>dg", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Show Diagnostics on Current Buffer" })
