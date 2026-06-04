@@ -1,0 +1,10 @@
+#!/bin/bash
+
+killall waybar
+waybar &
+
+killall swaync
+swaync &
+
+swaync-client -R
+swaync-client -rs

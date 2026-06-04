@@ -1,0 +1,7 @@
+#!/bin/bash 
+SELECTED_WALL=$(for a in *.jpg *.png; do echo -en "$a\0icon\x1f$a\n" ; done | rofi -dmenu -p "")
+
+if [ -n "$SELECTED_WALL" ]; then
+    set-theme "$SELECTED_WALL"
+fi 
+
