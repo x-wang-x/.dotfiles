@@ -3,11 +3,11 @@ local fileManager = "nemo"
 local menu        = "rofi -show drun"
 local browser     = "librewolf"
 
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
-local nav_up = "K"
-local nav_down = "J"
-local nav_left = "H"
-local nav_right = "L"
+local mainMod     = "SUPER" -- Sets "Windows" key as main modifier
+local nav_up      = "K"
+local nav_down    = "J"
+local nav_left    = "H"
+local nav_right   = "L"
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
@@ -53,10 +53,10 @@ hl.bind(mainMod .. " + CTRL +" .. nav_down, hl.dsp.window.resize({ x = 0, y = 10
 hl.bind(mainMod .. " + CTRL +" .. nav_up, hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
-    { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
-    { locked = true, repeating = true })
+-- hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
+--     { locked = true, repeating = true })
+-- hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+--     { locked = true, repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
     { locked = true, repeating = true })
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
@@ -70,4 +70,35 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
+-- Screenshot
+-- Require grim,slurp, and swappy
+hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
+hl.bind(mainMod .. "+ Print", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
 
+-- Speaker / headphone switcher for ryzen laptop
+---- this is specific workaround for my laptop advan workplus
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("amixer -c 1 sset Master 5%+ >/dev/null 2>&1"),
+    { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("amixer -c 1 sset Master 5%- >/dev/null 2>&1"),
+    { locked = true, repeating = true })
+
+local function toggle_hardware_audio()
+    local handle = io.popen("amixer -c 1 sget Speaker 2>/dev/null")
+    if not handle then return end
+    local amixer_output = handle:read("*a")
+    handle:close()
+    local is_speaker_muted = amixer_output:find("%[off%]")
+
+    if is_speaker_muted then
+        os.execute("amixer -c 1 sset Speaker 100% unmute >/dev/null 2>&1")
+        os.execute("amixer -c 1 sset Headphone 0% >/dev/null 2>&1")
+        print("Audio routed to Laptop Speakers (Headphones Muted)")
+    else
+        os.execute("amixer -c 1 sset Speaker mute >/dev/null 2>&1")
+        os.execute("amixer -c 1 sset Headphone 100% >/dev/null 2>&1")
+        print("Audio routed to Headphones (Speakers Muted)")
+    end
+end
+hl.bind(mainMod .. " + ALT + A", function()
+    toggle_hardware_audio()
+end, { description = "Toggle hardware audio between Speakers and Headphones" })
