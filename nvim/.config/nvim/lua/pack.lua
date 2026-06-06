@@ -22,40 +22,16 @@ vim.pack.add {
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/mason-org/mason.nvim",
     "https://github.com/mason-org/mason-lspconfig.nvim",
-    "https://github.com/nvim-mini/mini.completion",
+    'https://github.com/saghen/blink.lib',
+    "https://github.com/saghen/blink.cmp",
+    -- Snippets
+    "https://github.com/L3MON4D3/LuaSnip",
+    "https://github.com/rafamadriz/friendly-snippets",
     -- Markdown utility
     "https://github.com/MeanderingProgrammer/render-markdown.nvim",
     "https://github.com/jakewvincent/mkdnflow.nvim",
     "https://github.com/mzlogin/vim-markdown-toc"
 }
-require("mason").setup()
-require("mason-lspconfig").setup()
-require('mini.completion').setup()
-vim.lsp.config('lua_ls', {
-    settings = {
-        Lua = {
-            runtime = {
-                version = "LuaJIT",
-            },
-            workspace = {
-                checkThirdParty = false,
-                library = {
-                    vim.env.VIMRUNTIME,
-                    "/usr/share/hypr/stubs",
-                },
-                maxPreload = 1000,
-                preloadFileSize = 150,
-            },
-            diagnostics = {
-                globals = { "vim", "require", "hl" },
-                disable = { "missing-fields", "inject-field" },
-            },
-            telemetry = {
-                enable = false,
-            },
-        },
-    },
-})
 require('nvim-treesitter').setup {
     install_dir = vim.fn.stdpath('data') .. '/site'
 }
@@ -91,25 +67,25 @@ require("lualine").setup({
     },
 })
 require('render-markdown').setup({
-  file_types = { 'markdown' },
-  heading = {
-    -- Adds clean background bars/icons to H1, H2, H3, etc.
-    sign = true,
-    icons = { '█─ ', '██─ ', '███─ ', '#### ', '##### ', '###### ' },
-  },
-  code = {
-    sign = false,
-    width = 'block', -- Extends the background highlight window fully across the block
-    right_pad = 4,
-  },
-  checkbox = {
-    enabled = true,
-    unchecked = { icon = '󰄱 ' },
-    checked = { icon = ' ' },
-  },
-  pipe_table = {
-    preset = 'round', -- Generates beautiful rounded borders around raw text markdown tables
-  }
+    file_types = { 'markdown' },
+    heading = {
+        -- Adds clean background bars/icons to H1, H2, H3, etc.
+        sign = true,
+        icons = { '█ ', '██ ', '███ ', '████ ', '█████ ', '██████ ' },
+    },
+    code = {
+        sign = false,
+        width = 'block', -- Extends the background highlight window fully across the block
+        right_pad = 4,
+    },
+    checkbox = {
+        enabled = true,
+        unchecked = { icon = '󰄱 ' },
+        checked = { icon = ' ' },
+    },
+    pipe_table = {
+        preset = 'round', -- Generates beautiful rounded borders around raw text markdown tables
+    }
 })
 
 require('mkdnflow').setup({
@@ -127,6 +103,51 @@ require('mkdnflow').setup({
         tables = true,
         to_do = true,
         yaml = false,
-    notebook = true,
+        notebook = true,
     }
 })
+require("mason").setup()
+require("mason-lspconfig").setup()
+require("luasnip.loaders.from_vscode").lazy_load()
+vim.lsp.config('lua_ls', {
+    settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+            },
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME,
+                    "/usr/share/hypr/stubs",
+                },
+                maxPreload = 1000,
+                preloadFileSize = 150,
+            },
+            diagnostics = {
+                globals = { "vim", "require", "hl" },
+                disable = { "missing-fields", "inject-field" },
+            },
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+})
+local cmp = require('blink.cmp')
+cmp.build():pwait()
+cmp.setup({
+    signature = { enabled = true },
+    completion = {
+    menu = {
+        auto_show = true,
+        draw = {
+            columns = {
+                {"kind_icon" , "label",     "label_description", gap = 1 },
+                { "kind" }
+            },
+        }
+    },
+},
+})
+
