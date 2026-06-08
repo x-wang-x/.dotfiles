@@ -7,10 +7,10 @@ vim.keymap.set("n", "]q", "/[\"'`]<CR><cmd>nohl<CR>", { noremap = true, desc = "
 vim.keymap.set("n", "dq", "v/[\"'`]<CR><Left>d<cmd>nohl<CR>", { noremap = true, desc = "Delete up to next quote" })
 vim.keymap.set("n", "yq", "v/[\"'`]<CR><Left>y<cmd>nohl<CR>", { noremap = true, desc = "Yank up to next quote" })
 vim.keymap.set("n", "cq", "v/[\"'`]<CR><Left>di<cmd>nohl<CR>", { noremap = true, desc = "Change up to next quote" })
---- Better navigation on normal mode 
+--- Better navigation on normal mode
 vim.keymap.set('n', '<BS>', 'a<BS><Esc>', { noremap = true })
-vim.keymap.set('n', '<CR>', 'o<Esc>', { noremap = true, silent = true })
-vim.keymap.set('n', '<S-CR>', 'O<Esc>', { noremap = true, silent = true })
+vim.keymap.set('n', 'o', 'o<Esc>', { noremap = true, silent = true })
+vim.keymap.set('n', 'O', 'O<Esc>', { noremap = true, silent = true })
 --- Oil
 keymap("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Oil Filemanager" })
 keymap("n", "<leader>_", "<CMD>Oil --float<CR>", { desc = "Floating Oil Filemanager" })
@@ -58,7 +58,9 @@ keymap("n", "N", "Nzzzv", { desc = "Previous search result cursor centered" })
 ---- Better indent
 keymap("v", "<", "<gv", { desc = "Indent left and reselect" })
 keymap("v", ">", ">gv", { desc = "Indent right and reselect" })
--- Resize window using <ctrl> arrow keys
+---- Windows motion
+keymap("n", "<leader>sv", "<cmd>vsplit<cr>", { desc = "Split vertical" })
+keymap("n", "<leader>sh", "<cmd>split<cr>", { desc = "Split horizontal" })
 keymap("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 keymap("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 keymap("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
@@ -69,4 +71,13 @@ keymap("n", "<leader>dg", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Sh
 ---- Search and replace
 keymap("n", "<leader>rr", [[:%s/]], { desc = "Search and replace word under cursor" })
 keymap("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]], { desc = "Search and replace word under cursor" })
-
+---- Terminal
+keymap("n", "<C-`>", function()
+    vim.cmd.new() --> new window
+    vim.cmd.term() --> start terminal
+    vim.cmd.wincmd("j") --> move current cursor to terminal
+    vim.cmd.startinsert() --> enter insert mode
+    vim.api.nvim_win_set_height(0, 7) --> set window size
+end, { desc = "Open the terminal" })
+keymap("t", "QQ", "<cmd>q!<cr>", { desc = "Close terminal" })
+keymap("t", "<Esc>", "<cmd>stopi<cr>", { desc = "Go to normal mode" })
