@@ -1,4 +1,4 @@
-local terminal    = "kitty"
+local terminal    = "foot"
 local fileManager = "nemo"
 local menu        = "rofi -show drun"
 local browser     = "librewolf"
