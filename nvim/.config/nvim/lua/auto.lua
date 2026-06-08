@@ -33,3 +33,10 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("n", "<leader>sc", "z=", opts) -- Pulls up quick-fix word options
     end,
 })
+vim.api.nvim_create_autocmd('TermOpen', {
+    group = vim.api.nvim_create_augroup('custom-term-open',{clear = true}),
+    callback = function ()
+        vim.opt.number = false
+        vim.opt.relativenumber = false
+    end,
+})
