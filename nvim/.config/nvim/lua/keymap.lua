@@ -72,7 +72,7 @@ keymap("n", "<leader>dg", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Sh
 keymap("n", "<leader>rr", [[:%s/]], { desc = "Search and replace word under cursor" })
 keymap("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]], { desc = "Search and replace word under cursor" })
 ---- Terminal
-keymap("n", "<C-`>", function()
+keymap("n", "<C-x>", function()
     vim.cmd.new() --> new window
     vim.cmd.term() --> start terminal
     vim.cmd.wincmd("j") --> move current cursor to terminal
