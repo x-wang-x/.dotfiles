@@ -26,3 +26,7 @@ post_hook = "pkill -SIGUSR2 waybar"
 [templates.rofi]
 input_path = "~/.config/matugen/templates/rofi.rasi"
 output_path = "~/.config/rofi/matugen-colors.rasi"
+
+[templates.foot]
+input_path = "~/.config/matugen/templates/foot.ini"
+output_path = "~/.config/foot/matugen-colors.ini"
