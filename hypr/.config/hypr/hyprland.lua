@@ -9,8 +9,8 @@ hl.config({
         kb_layout    = "us",
         kb_variant   = "",
         kb_model     = "",
-        kb_options   = "",
         kb_rules     = "",
+        kb_options   = "caps:escape",
 
         follow_mouse = 1,
 
@@ -52,4 +52,3 @@ hl.window_rule({
 
     no_focus = true,
 })
-
