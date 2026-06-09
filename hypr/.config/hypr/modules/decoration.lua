@@ -1,8 +1,8 @@
 local colors = require("modules.themes.matugen_colors")
 hl.config({
     general = {
-        gaps_in          = 5,
-        gaps_out         = 10,
+        gaps_in          = 4,
+        gaps_out         = 2,
         border_size      = 2,
         col              = {
             active_border   = { colors = { colors.primary, colors.secondary }, angle = 45 },
@@ -13,39 +13,50 @@ hl.config({
         allow_tearing    = true,
         layout           = "dwindle",
     },
+    --Layout
+    dwindle = {
+        preserve_split = true, -- You probably want this
+    },
 
+    master = {
+        new_status = "master",
+    },
+
+    scrolling = {
+        fullscreen_on_one_column = true,
+    },
+    -- Decoration
     decoration = {
         rounding         = 10,
-        -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
-        inactive_opacity = 0.85,
+        inactive_opacity = 0.9,
 
         blur             = {
             enabled = true,
             size = 1,
             passes = 3,
         },
-        shadow           = {
-            enabled = true,
-            range = 4,
-            render_power = 3,
-            color = "rgba(1a1a1aee)",
-        }
+
     },
 
     animations = {
         enabled = true,
     },
+
+    misc = {
+        focus_on_activate = true -- Auto focus on just actived window
+    }
+
 })
 
--- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
+-- Curve
 hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
 hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1 } } })
 hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
 hl.curve("almostLinear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1 } } })
 hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
-
--- Default springs
+-- Spring
+hl.curve("rubber", { type = "spring", mass = 1, stiffness = 70, dampening = 10 })
 hl.curve("easy", { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
 
 hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
@@ -61,46 +72,29 @@ hl.animation({ leaf = "layersIn", enabled = true, speed = 4, bezier = "easeOutQu
 hl.animation({ leaf = "layersOut", enabled = true, speed = 1.5, bezier = "linear", style = "fade" })
 hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.79, bezier = "almostLinear" })
 hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1, spring = "easy", style = "slide" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1, spring = "easy", style = "slide" })
 hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
 
--- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
--- "Smart gaps" / "No gaps when only"
--- uncomment all if you wish to use that.
--- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
--- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
--- hl.window_rule({
---     name  = "no-gaps-wtv1",
---     match = { float = false, workspace = "w[tv1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
--- hl.window_rule({
---     name  = "no-gaps-f1",
---     match = { float = false, workspace = "f[1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
+---- Set smart-gaps on window
+--This set gap to 0  when only tiled window visible
+hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
+--This set gap to 0 when window is maximized fullscreen
+hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0 })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
-hl.config({
-    dwindle = {
-        preserve_split = true, -- You probably want this
-    },
+---- Set smart-border on window
+-- This remove border on tiled window if visible window is only one
+hl.window_rule({
+    name        = "no-gaps-wtv1",
+    match       = { float = false, workspace = "w[tv1]" },
+    border_size = 0,
+    rounding    = 0,
 })
-
--- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
-hl.config({
-    master = {
-        new_status = "master",
-    },
-})
-
--- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
-hl.config({
-    scrolling = {
-        fullscreen_on_one_column = true,
-    },
+-- set no border if window is maximized fullscreen
+hl.window_rule({
+    name        = "no-gaps-f1",
+    match       = { float = false, workspace = "f[1]" },
+    border_size = 0,
+    rounding    = 0,
 })
