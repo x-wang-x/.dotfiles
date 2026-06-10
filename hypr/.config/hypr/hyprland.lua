@@ -13,7 +13,6 @@ hl.config({
         kb_options   = "caps:escape",
 
         follow_mouse = 1,
-
         sensitivity  = 0,
 
         touchpad     = {
@@ -27,19 +26,16 @@ hl.gesture({
     action = "workspace"
 })
 
--- Example window rules that are useful
-
+-- Ignore maximize requests from all apps
 local suppressMaximizeRule = hl.window_rule({
-    -- Ignore maximize requests from all apps. You'll probably like this.
     name           = "suppress-maximize-events",
     match          = { class = ".*" },
-
     suppress_event = "maximize",
 })
-suppressMaximizeRule:set_enabled(false)
+suppressMaximizeRule:set_enabled(true)
 
+-- Fix some dragging issues with XWayland
 hl.window_rule({
-    -- Fix some dragging issues with XWayland
     name     = "fix-xwayland-drags",
     match    = {
         class      = "^$",
@@ -49,6 +45,5 @@ hl.window_rule({
         fullscreen = false,
         pin        = false,
     },
-
     no_focus = true,
 })
