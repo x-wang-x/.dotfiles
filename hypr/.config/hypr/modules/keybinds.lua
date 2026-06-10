@@ -10,18 +10,20 @@ local nav_left    = "H"
 local nav_right   = "L"
 
 hl.bind("SUPER + Tab", function()
-    hl.dispatch(hl.dsp.window.cycle_next())   -- Change focus to another window
-    hl.dispatch(hl.dsp.window.bring_to_top()) -- Bring it to the top
-end,
-{description = "Cycle window"})
+        hl.dispatch(hl.dsp.window.cycle_next()) -- Change focus to another window
+        hl.dispatch(hl.dsp.window.bring_to_top()) -- Bring it to the top
+    end,
+    { description = "Cycle window" })
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal), { description = "Open terminal" })
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("theme-interface"), { description = "Open theme switcher" })
+hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal), { description = "Open terminal" })
 local closeWindowBind = hl.bind(mainMod .. " + W", hl.dsp.window.close())
 closeWindowBind:set_enabled(true)
 hl.bind(mainMod .. " + M",
     hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"),
     { description = "Lock" })
+hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("toggle-waybar"), { release = true, description = "Toggle Waybar" })
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager), { description = "Open file manager" })
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser), { description = "Open browser" })
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }), { description = "Toggle float window" })
@@ -40,8 +42,9 @@ hl.bind(mainMod .. " + " .. nav_down, hl.dsp.focus({ direction = "down" }), { de
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }), {description = "Focus to workspace " .. i})
-    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }), {description = "Move window to workspace " .. i})
+    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }), { description = "Focus to workspace " .. i })
+    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }),
+        { description = "Move window to workspace " .. i })
 end
 
 -- Scroll through existing workspaces with mainMod + scroll
@@ -53,12 +56,13 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { description = "Drag w
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { description = "Resize with mouse", mouse = true })
 
 hl.bind(mainMod .. " + CTRL +" .. nav_right, hl.dsp.window.resize({ x = 10, y = 0, relative = true }),
-    { repeating = true , description = "Resize +x" })
+    { repeating = true, description = "Resize +x" })
 hl.bind(mainMod .. " + CTRL +" .. nav_left, hl.dsp.window.resize({ x = -10, y = 0, relative = true }),
-    { repeating = true , description = "Resize -x" })
+    { repeating = true, description = "Resize -x" })
 hl.bind(mainMod .. " + CTRL +" .. nav_down, hl.dsp.window.resize({ x = 0, y = 10, relative = true }),
-    { repeating = true , description = "Resize +y" })
-hl.bind(mainMod .. " + CTRL +" .. nav_up, hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true , description = "Resize -y" })
+    { repeating = true, description = "Resize +y" })
+hl.bind(mainMod .. " + CTRL +" .. nav_up, hl.dsp.window.resize({ x = 0, y = -10, relative = true }),
+    { repeating = true, description = "Resize -y" })
 
 -- Laptop multimedia keys for volume and LCD brightness
 -- hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
