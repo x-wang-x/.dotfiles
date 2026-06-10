@@ -8,6 +8,6 @@ WP_PATH=$(realpath "$1")
 #set wallpaper
 awww img "$WP_PATH" --transition-type center --transition-step 1 --transition-fps 60
 #generate color
-matugen image "$WP_PATH"
+matugen image "$WP_PATH" --contrast 0 --prefer value
 #restart waybar
 restart-theme
