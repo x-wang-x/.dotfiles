@@ -1,4 +1,5 @@
-need to install
+# .dotfile 
+## requirement
 
 - stow
 - zsh
@@ -8,11 +9,15 @@ need to install
 - ghostty
 - swaync
 - zoxide
+- pipewire pipewire-alsa pipewire-audio pipewire-jack pipewire-pulse
 - pavucontrol
 - network-manager-applet
 - nemo
 - waybar
 - swww
 - rofi
+    - rofi-calc
 - wl-clipboard
 - matugen
+- grim slurp swappy
+- alsa-utils
