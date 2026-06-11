@@ -1,4 +1,5 @@
 #!/bin/bash 
+killall rofi
 # CWD=$(pwd)
 cd $HOME/Pictures
 SELECTED_WALL=$(for a in *.jpg *.png; do echo -en "$a\0icon\x1f$a\n" ; done | rofi -dmenu -p "")
